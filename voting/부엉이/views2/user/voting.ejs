@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> </head>
+
+<body>
+  <div class="py-2 bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="display-1">컴퓨터 공학과 단대 투표</h1>
+          <h1 class="">2018.11.12~2018.11.13</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form id="vote-form" action = "./done.html" method="post">
+
+    <div class="py-4">
+      <div class="container">
+        <div class="vote"><br>
+          <% include partials/top %>
+            <h3><%= data.college %> <%= data.department %> <%= data.category %> 선거</h3>
+            <%= data.startDate.toLocaleDateString()+" "+data.startDate.toLocaleTimeString()+" ~ " %>
+        </div>
+        <div class="row" id='candidates'></div>
+      </div>
+    </div>
+    <div class="py-4 bg-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="text-center"><b>투표하시겠습니까?</b></h1>
+            <hr> </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p class="text-center">한번 투표하면 절대 재투표 불가하므로 신중히 선택해 주세요</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-lg btn-block btn-danger">투표</a>
+          </div>
+        </div>
+      </div>
+  </form>
+  </div>
+  <div class="text-center text-white py-1 bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 my-2">
+          <a href="https://www.facebook.com/" class="text-white" target="_blank"><i class="fa fa-fw fa-facebook fa-3x mx-3"></i></a>
+          <a href="https://twitter.com/" class="text-white" target="_blank"><i class="fa fa-fw fa-twitter fa-3x mx-3"></i></a>
+          <a href="https://plus.google.com/" class="text-white" target="_blank"><i class="fa fa-fw fa-3x fa-google-plus mx-3"></i></a>
+          <a href="https://www.instagram.com/" class="text-white" target="_blank"><i class="fa fa-fw fa-instagram fa-3x mx-3"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead text-center my-2">Copyright@이화여자대학교</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+  <script src="./voting.js"></script>
+</body>
+
+</html>

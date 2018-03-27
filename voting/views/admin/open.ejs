@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/head %>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.18/jquery.datetimepicker.min.css" type="text/css" />
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.2/moment-with-locales.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.18/jquery.datetimepicker.full.js"></script>  
+</head>
+
+<body>
+  <script>
+    function fnCngCategory(e){
+        var targetCollege = document.getElementById("college");
+        var targetDpt = document.getElementById("department");
+        
+        if(e == "") {
+            num = new Array("");
+        } else if(e == "총학생회") {
+            num = new Array("");
+        } else if(e == "단대 대표" || e == "과 대표") {
+            num = new Array("인문과학대학","사회과학대학","자연과학대학","엘텍공과대학","음악대학","조형예술대학","사범대학","경영대학","신산업융합대학","의과대학","간호대학","약학대학","스크랜튼대학");
+        } 
+        targetCollege.options.length = 0;
+        targetDpt.options.length = 0;
+        for (x in num) {
+            var opt = document.createElement("option");
+            opt.value = num[x];
+            opt.innerHTML = num[x];
+            targetCollege.appendChild(opt);
+        }
+    }
+      
+    function fnCngCollege(e){
+        var target = document.getElementById("department");
+        
+        if(e == "") {
+            num = new Array("");
+        } else if(e == "인문과학대학") {
+            num = new Array("국어국문학과","중어중문학과","영어영문학과","불어불문학과","독어독문학과","사학과","철학과","기독교학과");
+        } else if(e == "사회과학대학") {
+            num = new Array("정치외교학과","행정학과","경제학과","문헌정보학과","사회학과","사회복지학과","심리학과","소비자학과","커뮤니케이션/미디어학과");
+        } else if(e == "자연과학대학") {
+            num = new Array("수학과","통계학과","물리학과","화학/나노과학과","생명과학과");
+        } else if(e == "엘텍공과대학") {
+            num = new Array("휴먼기계바이오공학부","컴퓨터공학과","사이버보안학과","전자전기공학과","화학신소재공학과","식품공학과","기후/에너지시스템공학과","환경공학과","건축도시시스템공학과","건축학과");
+        } else if(e == "음악대학") {
+            num = new Array("건반악기과","관현악과","성악과","작곡과","한국음악과","무용과");
+        } else if(e == "조형예술대학") {
+            num = new Array("동양화과","서양화과","조소과","도자예술과","디자인학부","섬유예술과","패션디자인과");
+        } else if(e == "사범대학") {
+            num = new Array("교육학과","유아교육과","초등교육과","교육공학과","특수교육과","영어교육과","사회과교육과","국어교육과","과학교육과","수학교육과");
+        } else if(e == "경영대학") {
+            num = new Array("경영학과");
+        } else if(e == "신산업융합대학") {
+            num = new Array("융합콘텐츠학과","의류산업학과","국제사무학과","체육과학부","식품영양학과","융합보건학과");
+        } else if(e == "의과대학") {
+            num = new Array("의예과","의학과");
+        } else if(e == "간호대학") {
+            num = new Array("간호학부");
+        } else if(e == "약학대학") {
+            num = new Array("약학과");
+        } else if(e == "스크랜튼대학") {
+            num = new Array("스크랜튼학부","융합학부","국제학부");
+        } 
+        target.options.length = 0;
+        for (x in num) {
+            var opt = document.createElement("option");
+            opt.value = num[x];
+            opt.innerHTML = num[x];
+            target.appendChild(opt);
+        }
+    }
+      
+    //----------------------------------DateTimePicker----------------------------------
+    $(function() {
+        $('#fromDate').datetimepicker({});
+        $('#toDate').datetimepicker({});
+    });
+
+    //----------------------------------후보칸 추가 및 삭제----------------------------------
+    $(function() {
+        var scntDiv = $('#p_scents');
+        var i = $('#p_scents p').length;
+        
+        $('#addScnt').on('click', function() {
+            $('<p class="w-100" contenteditable="true"><a href="#" class="btn pull-right" id="remScnt"><span style="font-weight:bold; font-size:1.5em;">×</span></a><label for="p_scnts" class="w-100"><input type="text" id="p_scnt" class="form-control candidate" name="voting[candidate_'+i+']" placeholder="후보 이름을 입력해주세요"></label></p>').appendTo(scntDiv);
+            i++;
+            console.log(i);
+            return false;
+        });
+
+        $(document).on("click", '#remScnt', function(e) {
+            if( i > 1 ) {
+                $(this).closest('p').remove();
+                i--;
+            }
+            return false;
+        });
+    });
+  </script>
+    
+  <div class="py-5" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/form_red.jpg&quot;);">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center text-md-left display-3 text-white">신규 투표 개설</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 py-2" id="book">
+          <div class="card">
+            <div class="card-header"><b><i>기간</i></b></div>
+            <div class="card-body p-4">
+                <div class="form-group form-row"> <label class="col-sm-2 col-form-label">시작 날짜</label>
+                  <div class="col-sm-10">
+                    <input id="fromDate" type="text" class="form-control" name="voting[startDate]"></div>
+                </div>
+                <div class="form-group form-row"> <label class="col-sm-2 col-form-label">종료 날짜</label>
+                  <div class="col-sm-10">
+                    <input id="toDate" type="text" class="form-control" name="voitng[endDate]"></div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 py-2" id="book">
+          <div class="card">
+            <div class="card-header"><b><i>부문</i></b></div>
+            <div class="card-body p-4">
+                <div class="form-group form-row"> <label class="col-sm-2 col-form-label">회차</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" name="voting[round]" placeholder="숫자를 입력해주세요"> </div>
+                </div>
+                <div class="form-group form-row"><label class="col-sm-2 col-form-label">부문</label>
+                  <div class="col-sm-10"><select class="form-control" name="voting[category]" onchange="fnCngCategory(this.value);">
+                    <option value="">선택</option>
+                    <option value="총학생회">총학생회</option>
+                    <option value="단대 대표">단대 대표</option>
+                    <option value="과 대표">과 대표</option>
+                  </select>
+                </div>
+                </div>
+                <form name=signform>
+                <div class="form-group form-row"><label class="col-sm-2 col-form-label">단과대학</label>
+                  <div class="col-sm-10"><select class="form-control" name="voting[college]" id="college" onchange="fnCngCollege(this.value);">
+              		<option value="">선택</option>
+                  </select>
+                </div>
+                </div>
+                <div class="form-group form-row"><label class="col-sm-2 col-form-label">학부/학과</label>
+                  <div class="col-sm-10"><select class="form-control" name=voting[department] id="department" onchange=fnCngDepartment(this.value);>
+              		<option value="">선택</option>
+                  </select>
+                </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 my-2" id="book">
+          <div class="card">
+            <div class="card-header"><b><i>후보</i></b></div>
+            <div class="card-body p-4">
+              <div class="form-group form-row" id="p_scents">
+                <p class="w-100" contenteditable="true"> 
+                    <label for="p_scnts" class="w-100"> 
+                        <input type="text" id="p_scnt" class="form-control candidate" name="voting[candidate_0]" placeholder="후보 이름을 입력해주세요">
+                    </label>
+                </p>
+                <p class="w-100" contenteditable="true">
+                    <a href="#" class="btn pull-right" id="remScnt"><span style="font-weight:bold; font-size:1.5em;">×</span></a>
+                    <label for="p_scnts" class="w-100">
+                        <input type="text" id="p_scnt" class="form-control candidate" name="voting[candidate]" placeholder="후보 이름을 입력해주세요">
+                    </label>
+                </p>
+              </div>
+              <a href="#" id="addScnt" class="btn btn-block btn-outline-info w-100">추가</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 my-2" id="book">
+          <h1 class="text-center text-white">입력하신 내용을 다시 한 번 확인해주세요</h1>
+          <button type="submit" class="btn btn-success btn-block btn-lg text-white">개설</a>
+          <!-- <a class="btn btn-primary btn-block" href="lists">개설</a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partials/head %>      
+  </head>
+    
+  <body>
+    <div class="register">
+    <div class="py-5" style="background-image: url('https://pingendo.github.io/templates/sections/assets/form_red.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center display-3 text-light"><b>BOTING</b></h1>
+                    <h3 class="text-center text-white">이화여자대학교 전자투표시스템</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-5 bg-info">
+        <div class="container">
+            <div class="row">
+                <div class="align-self-center col-md-12 text-white">
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <h1 class="pb-3" contenteditable="true"><b>회원가입&nbsp;</b></h1>
+                            <form id="create_user" class="users_form" action="/register" method="post">
+                                <div class="form-group"> 
+                                    <label>학번</label><input class="form-control" type="text" name="user[id]" placeholder="학번 7자리를 입력해주세요"> 
+                                </div>
+                                <div class="form-group"> 
+                                    <label>비밀번호</label><input class="form-control" type="password" name="user[password]" placeholder=""> 
+                                </div>
+                                <button type="submit" class="btn mt-2 btn-outline-success btn-block my-4">회원가입</button>
+                                <a href="/index" class="btn mt-2 btn-outline-primary btn-block my-4">로그인</a>
+                                <div>
+                                    <span id="idError" class="error_message"><%= idError?idError:"" %></span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer>
+      <% include partials/footer %>
+    </footer>
+  </body>
+</html>
+
+<!--script type="text/javascript" src="/js/userform.js"></script-->

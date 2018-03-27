@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partials/head %>      
+  </head>
+    
+  <body class="container">
+    <header>
+        <h1>Simple Voting Application</h1>
+      <!--% include partials/header %-->  
+    </header>
+    <!--div class="login"--><br>
+      <div>
+        <h4>로그인</h4>
+        <form class="login_form" action="index" method="post">
+          <label>학번</label>
+          <input type="text" name="id" value="">
+          <label>비밀번호</label>
+          <input type="password" name="password" value="">
+          <!--input class="cvRequired" type="text" name="email" cvRqErrMsg="Please enter your login email." cvRqErrTo="#cvRqErrEmail" value="">
+          <div id="cvRqErrEmail" class="message"></div-->
+          <button type="submit" class="btn btn-success">로그인</button>
+          <!--button type="submit" class="btn btn-success" onclick="location.href='/register'">회원가입</button-->
+          <button type="button" class="btn btn-success" onclick="location.href='/register'">회원가입</button>
+          <% loginError.forEach(function(e){ %>
+            <p class="error_message"><%= e %></p>
+          <% }) %>
+        </form>
+      </div>
+    <!--/div-->
+    <footer>
+      <% include partials/footer %>
+    </footer>
+  </body>
+</html>

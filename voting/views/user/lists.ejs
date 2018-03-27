@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head %>
+    <% include ../partials/header %> 
+  </head>
+    
+  <body>
+    <div class="lists">
+      <div class="py-5" style="background-image: url('https://pingendo.github.io/templates/sections/assets/form_red.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center display-3 text-light"><b>BOTING</b></h1>
+                    <h3 class="text-center text-white">이화여자대학교 전자투표시스템</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a href="#all" class="nav-link active" aria-controls="all" aria-selected="true" data-toggle="tab" id="home-tab" role="tab">전체</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#undo" aria-controls="undo" aria-selected="false" data-toggle="tab" id="profile-tab" role="tab">미완료 투표</a>
+              </li>
+              <li class="nav-item">
+                <a href="#end" class="nav-link" aria-controls="end" aria-selected="false" data-toggle="tab" id="contact-tab" role="tab">종료 투표</a>
+              </li>
+            </ul>
+            <div class="tab-content my-2" id="myTabContent">
+              <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="home-tab">
+                <div class="py-3">
+                  <div class="container">
+                    <div class="row">
+                      <% data.forEach(function(e){ %>
+                        <div class="col-md-11">
+                          <ul class="breadcrumb my-2" style="margin-bottom:0px;margin-top:0px">
+                            <li class="breadcrumb-item">제 <%= e.round %>대 <%= e.college %> <%= e.department %> <%= e.category %> 선거</li>
+                            <li class="breadcrumb-item active"><%= e.startDate.getFullYear()+"년 "+(e.startDate.getMonth()+1)+"월 "+e.startDate.getDate()+"일 "+e.startDate.getHours()+"시"+" ~ " %>
+                            <%= e.endDate.getFullYear()+"년 "+(e.endDate.getMonth()+1)+"월 "+e.endDate.getDate()+"일 "+e.endDate.getHours()+"시" %></li>
+                          </ul>
+                        </div>
+                        <div class="col-md-1">
+                          <% var today = new Date(); %>
+                          <% if (today < e.startDate) { %>
+                            <a><button type="button" class="btn btn-outline-primary my-2" disabled="disabled">투표</button></a>
+                          <% } else if (today > e.endDate) { %>
+                            <a href="/user/result/<%= e._id %>"><button type="button" class="btn btn-outline-danger my-2">결과</button></a>
+                          <!--% } else if (today >= e.startDate && today <= e.endDate && 투표했으면) { %-->
+                            <!--a href="/user/result/<%= e._id %>"><button type="button" class="btn btn-outline-success my-2" disabled="disabled">완료</button></a-->
+                          <% } else if (today >= e.startDate && today <= e.endDate) {%>
+                            <a href="/user/lists/<%= e._id %>"><button type="button" class="btn btn-outline-primary my-2">투표</button></a>
+                          <% } %>
+                        </div>
+                      <% }) %>
+                    </div>
+                  </div>
+                </div>
+                <ul class="pagination justify-content-center">
+                  <% var offset = 3; %>
+                  <% for(var i=1; i<=maxPage; i++){ %>
+                    <% if(i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))){ %>
+                        <% if(i != page){ %>
+                            <li class><a href="?page=<%= i %>">[<%= i %>]</a></li>
+                        <% } else { %>
+                            <li class="active"><a>[<%= i %>]</a></li>
+                        <% } %>
+                    <% } else if(i == offset+1 || i == maxPage-offset){ %>
+                        <li>...</li>
+                    <% } %>
+                  <% } %>
+                </ul>
+              </div>
+                <!--투표시작,미완료-->
+              <div class="tab-pane fade" id="undo" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="py-3">
+                  <div class="container">
+                    <div class="row">
+                      <% data.forEach(function(e){ %>
+                        <% var today = new Date(); %>
+                        <% if (today >= e.startDate && today <= e.endDate) {%>
+                        <div class="col-md-11">
+                          <ul class="breadcrumb my-2" style="margin-bottom:0px;margin-top:0px">
+                            <li class="breadcrumb-item">제 <%= e.round %>대 <%= e.college %> <%= e.department %> <%= e.category %> 선거</li>
+                            <li class="breadcrumb-item active"><%= e.startDate.getFullYear()+"년 "+(e.startDate.getMonth()+1)+"월 "+e.startDate.getDate()+"일 "+e.startDate.getHours()+"시"+" ~ " %>
+                            <%= e.endDate.getFullYear()+"년 "+(e.endDate.getMonth()+1)+"월 "+e.endDate.getDate()+"일 "+e.endDate.getHours()+"시" %></li>
+                          </ul>
+                        </div>
+                        <div class="col-md-1">
+                          <a href="/user/lists/<%= e._id %>"><button type="button" class="btn btn-outline-primary my-2">투표</button></a>
+                        </div>
+                        <% } %>
+                      <% }) %>
+                    </div>
+                  </div>
+                </div>
+                <ul class="pagination justify-content-center">
+                  <% var offset = 3; %>
+                  <% for(var i=1; i<=maxPage; i++){ %>
+                    <% if(i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))){ %>
+                        <% if(i != page){ %>
+                            <li class><a href="?page=<%= i %>">[<%= i %>]</a></li>
+                        <% } else { %>
+                            <li class="active"><a>[<%= i %>]</a></li>
+                        <% } %>
+                    <% } else if(i == offset+1 || i == maxPage-offset){ %>
+                        <li>...</li>
+                    <% } %>
+                  <% } %>
+                </ul>
+              </div>
+              <div class="tab-pane fade" id="end" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="py-3">
+                  <div class="container">
+                    <div class="row">
+                      <% data.forEach(function(e){ %>
+                        <% var today = new Date(); %>
+                        <% if (today > e.endDate) {%>
+                        <div class="col-md-11">
+                          <ul class="breadcrumb my-2" style="margin-bottom:0px;margin-top:0px">
+                            <li class="breadcrumb-item">제 <%= e.round %>대 <%= e.college %> <%= e.department %> <%= e.category %> 선거</li>
+                            <li class="breadcrumb-item active"><%= e.startDate.getFullYear()+"년 "+(e.startDate.getMonth()+1)+"월 "+e.startDate.getDate()+"일 "+e.startDate.getHours()+"시"+" ~ " %>
+                            <%= e.endDate.getFullYear()+"년 "+(e.endDate.getMonth()+1)+"월 "+e.endDate.getDate()+"일 "+e.endDate.getHours()+"시" %></li>
+                          </ul>
+                        </div>
+                        <div class="col-md-1">
+                          <a href="/user/result/<%= e._id %>"><button type="button" class="btn btn-outline-danger my-2">결과</button></a>
+                        </div>
+                        <% } %>
+                      <% }) %>
+                    </div>
+                  </div>
+                </div>
+                <ul class="pagination justify-content-center">
+                  <% var offset = 3; %>
+                  <% for(var i=1; i<=maxPage; i++){ %>
+                    <% if(i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))){ %>
+                        <% if(i != page){ %>
+                            <li class><a href="?page=<%= i %>">[<%= i %>]</a></li>
+                        <% } else { %>
+                            <li class="active"><a>[<%= i %>]</a></li>
+                        <% } %>
+                    <% } else if(i == offset+1 || i == maxPage-offset){ %>
+                        <li>...</li>
+                    <% } %>
+                  <% } %>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 bg-secondary">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center display-3 text-light">실시간 투표율을 확인하세요!</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <h1 class="text-center">학과별 투표율</h1>
+              <img class="img-fluid d-block w-100 mb-3 rounded" src="https://pingendo.github.io/templates/sections/assets/gallery_4.jpg">
+              <p class=""></p>
+            </div>
+            <div class="col-md-6">
+              <h1 class="text-center">단대별 투표율</h1>
+              <img class="img-fluid d-block w-100 mb-3 rounded" src="https://pingendo.github.io/templates/sections/assets/gallery_6.jpg">
+              <p class=""></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>   
+    </div>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>

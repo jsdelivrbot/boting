@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head %>      
+  </head>
+    
+  <body class="container">
+    <header>
+      <% include ../partials/header %>  
+    </header>
+    <div class="lists"><br>
+      <% include partials/top %>
+        <ul>
+          <div class="table-resposive">
+            <table class="table table-hover" style="text-align:center">
+                <thead>
+                    <th style="text-align:center">제목</th>
+                    <th style="text-align:center">기간</th>
+                    <th style="text-align:center">vote</th>
+                </thead>
+                <tbody>
+                    <% data.forEach(function(e){ %>
+                    <td><%= e.title %></td>
+                    <td><%= e.startDate.toLocaleDateString()+" "+e.startDate.toLocaleTimeString()+" ~ " %></td>
+                    <!--+e.endDate.toLocaleDateString()+" "+e.endDate.toLocaleTimeString() %></td-->
+                    <td><a href="/user/lists/<%= e._id %>"><button type="button" class="btn btn-success">수정</button></a>
+                    <a href="/user/lists/<%= e._id %>"><button type="button" class="btn btn-danger">삭제</button></a></td>
+                </tbody>
+                <% }) %>
+            </table>
+          </div>
+          <ul class="pagination text-center">
+            <% var offset = 2; %>
+            <% for(var i=1; i<=maxPage; i++){ %>
+                <% if(i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))){ %>
+                  <% if(i != page){ %>
+                    <li class><a href="?page=<%= i %>"><%= i %></a></li>
+                  <% } else { %>
+                    <li class="active"><a><%= i %></a></li>
+                  <% } %>
+                <% } else if(i == offset+1 || i == maxPage-offset){ %>
+                    <li>...</li>
+                <% } %>
+            <% } %>
+          </ul>
+        </ul>
+    </div>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>

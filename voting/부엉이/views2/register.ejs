@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partials/head %>      
+  </head>
+    
+  <body class="container">
+    <header>
+      <h1>Simple Voting Application</h1>
+      <!--% include partials/header %-->  
+    </header>
+    <!--div class="login"--><br>
+      <div class="register">
+        <h4>회원가입</h4>
+        <form id="create_user" class="users_form" action="/register" method="post">
+          <label>학번</label>
+          <input type="text" name="user[id]">
+          <label>비밀번호</label>
+          <input type="password" name="user[password]">
+          <!--input class="cvRequired" type="text" name="email" cvRqErrMsg="Please enter your login email." cvRqErrTo="#cvRqErrEmail" value="">
+          <div id="cvRqErrEmail" class="message"></div-->
+          <button type="submit" class="btn btn-success">회원가입</button>
+          <div>
+            <span id="idError" class="error_message"><%= idError?idError:"" %></span>
+          </div>
+        </form>
+        <a href="javascript:history.back()"><button>Back</button></a>
+      </div>
+    <!--/div-->
+    <footer>
+      <% include partials/footer %>
+    </footer>
+  </body>
+</html>
+
+<!--script type="text/javascript" src="/js/userform.js"></script-->

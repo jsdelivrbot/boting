@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <div class="container">
+    <li class="navbar-brand"><span style="font-weight:bold">BOTING</span> 이화여자대학교 전자투표시스템</li>    
+    <div class="collapse navbar-collapse text-center" id="navbar3SupportedContent">
+      <ul class="navbar-nav ml-auto">    
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-5" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-user fa-2x" style="color:white" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item">
+              <div>
+                <span style="font-weight:bold">학번</span>
+                <span class="small"><%= user.id %></span>
+              </div>
+              <div>
+                <span style="font-weight:bold">계좌</span>
+                <span class="small"><%= user.account %></span>
+              </div>
+            </a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mr-lg-2" href="/user/lists"><i class="fa fa-home fa-2x" style="color:white" aria-hidden="true"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link mr-lg-2" href="/logout"><i class="fa fa-sign-out fa-2x" style="color:white" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

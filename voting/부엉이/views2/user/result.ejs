@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head %>
+  </head>
+
+  <body class="container">
+    <header>
+      <% include ../partials/header %>
+    </header>
+    <div class="vote"><br>
+      <% include partials/top %>
+        <h3><%= data.college %> <%= data.department %> <%= data.category %> 선거</h3>
+        <%= data.startDate.toLocaleDateString()+" "+data.startDate.toLocaleTimeString()+" ~ " %>
+    </div>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>

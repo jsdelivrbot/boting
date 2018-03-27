@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head %>
+    <% include ../partials/header %>
+    <script>
+        window.onload = function() {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        {y: 79.45, label: "Google"},
+                        {y: 7.31, label: "Bing"},
+                        {y: 7.06, label: "Baidu"},
+                        {y: 4.91, label: "Yahoo"},
+                        {y: 1.26, label: "Others"}
+                    ]
+                }]
+            });
+            chart.render();
+        }
+    </script>
+  </head>
+
+  <body>
+  <div class="vote">
+    <div class="py-2 bg-primary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="display-6 text-center">제 <%= data.round %>대</h1>
+            <h1 class="display-3 text-center"><%= data.college %> <%= data.department %> <%= data.category %> 선거</h1>
+            <h3 class="text-center"><%= data.startDate.getFullYear()+"년 "+(data.startDate.getMonth()+1)+"월 "+data.startDate.getDate()+"일 "+data.startDate.getHours()+"시"+" ~ " %>
+            <%= data.endDate.getFullYear()+"년 "+(data.endDate.getMonth()+1)+"월 "+data.endDate.getDate()+"일 "+data.endDate.getHours()+"시" %></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--후보-->
+    <div class="py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="display-4 text-center">후보가 당선되었습니다</h1>
+            <div id="chartContainer" style="height: 500px; width: 100%;"></div>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+  </body>
+</html>

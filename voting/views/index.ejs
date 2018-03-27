@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include partials/head %>      
+  </head>
+    
+  <body>
+    <div class="index">
+      <div class="py-5 bg-gradient" style="background-image: url(&quot;https://pingendo.github.io/templates/sections/assets/form_red.jpg&quot;);">
+        <div class="container">
+            <div class="row">
+                <div class="align-self-center col-md-6 text-white">
+                    <h1 class="text-md-left display-3 text-light"><b>BOTING</b></h1>
+                    <h3 class="text-white">이화여자대학교 전자투표시스템</h3>
+                    
+                </div>
+                <div class="col-md-6" id="book">
+                    <div class="card">
+                        <div class="card-body p-5">
+                            <h1>로그인</h1>
+                            <form class="login_form" action="index" method="post">
+                                <div class="form-group">
+                                    <label>학번</label><input class="form-control" type="text" name="id" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label>비밀번호</label><input  class="form-control" type="password" name="password" value="">
+                                </div>
+                                <!--input class="cvRequired" type="text" name="email" cvRqErrMsg="Please enter your login email." cvRqErrTo="#cvRqErrEmail" value="">
+                                <div id="cvRqErrEmail" class="message"></div-->
+                                <button type="submit" class="btn mt-2 btn-block btn-outline-primary my-4">로그인</button>
+                                <!--button type="submit" class="btn btn-success" onclick="location.href='/register'">회원가입</button-->
+                                <% loginError.forEach(function(e){ %>
+                                    <p class="error_message"><%= e %></p>
+                                <% }) %>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="py-5 text-white text-center bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-dark">아직 계정이 없으신가요?</h1>
+                    <!--p class="lead mb-4 text-muted">Boting 이용을 위해 하나 만드세요!</p-->
+                    <a class="btn btn-block btn-primary btn-lg" onclick="location.href='/register'"><b>회원가입</b></a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <% include partials/footer %>
+    </footer>
+  </body>
+</html>
